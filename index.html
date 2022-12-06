@@ -1,0 +1,69 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Webcam CAI Lombardia</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <p class="heading">Webcam Commissione Rifugi - CAI Lombardia</p>
+  <div id="gallery" class="gallery-image"></div> <!-- Lodges gallery container -->
+</body>
+
+<script>
+  // lodges[] contains the data to display correctly every lodge
+  // The parameters are then sent to the gallery page via URL
+  const lodges = [
+  { name: "Rifugio Del Grande-Camerini", ID: "00003157" },
+  { name: "Rifugio Del Grande-Camerini - Monte Disgrazia", ID: "90003157" },
+  { name: "Rifugio Dalco", ID: "00002089" },
+  { name: "Rifugio Ventina", ID: "00002432" },
+  { name: "Rifugio Motta", ID: "00002640" },
+  { name: "Rifugio Rosalba", ID: "00002575" },
+  { name: "Rifugio Della Corte", ID: "00002272" },
+  { name: "Rifugio Salmurano", ID: "00002067" },
+  { name: "Rifugio Shambalà", ID: "00001606" },
+  { name: "Rifugio Brasca", ID: "00002596" },
+  { name: "Rifugio Omio", ID:"00001765" },
+  { name: "Rifugio Longo", ID:"00002935" },
+  { name: "Rifugio Pialeral", ID: "00001825" },
+  { name: "Rifugio Longoni", ID: "00002556" },
+  { name: "Rifugio Zoia", ID: "00001785" },
+  { name: "Bivacco Città di Cantù", ID: "90002047" },
+  { name: "Rifugio Gherardi", ID:"00003256" },
+  { name: "Rifugio Brioschi", ID: "00002605" },
+  { name: "Rifugio Quinto Alpini", ID: "00002047" },
+  { name: "Rifugio Tagliaferri", ID: "00003295" },
+  { name: "Rifugio Passo San Marco", ID: "00002416" },
+  { name: "Rifugio Marinelli Bombardieri", ID: "00001846" },
+  { name: "Rifugio Città di Lissone", ID: "00002557"},
+  { name: "Rifugio Gianetti Piacco", ID: "00002595" },
+  { name: "Rifugio Porta", ID: "00002637" },
+  { name: "Rifugio Allievi Bonacossa", ID: "00002617" },
+  { name: "Rifugio Gerli Porro", ID: "00002600" },
+  { name: "Rifugio Bignami", ID: "00002603" },
+  { name: "Rifugio Ponti", ID: "00002604" },
+  { name: "Rifugio Bozzi", ID: "00002558"}
+  ]
+
+  // Create all lodges images, with caption and hyperlink to the gallery
+  const Gallery = document.getElementById('gallery');
+  for (let index = 0; index < lodges.length; index++) {
+    Gallery.innerHTML +=
+    '<div>' +
+      '<a target="_blank" href="gallery.html?name='+encodeURIComponent(lodges[index].name)+'&ID='+lodges[index].ID+'">' +
+        '<div class="img-box">' +
+          '<img src="https://webcam.rifugi.lombardia.it/rifugio/' + lodges[index].ID + '/pictures/image__0.thumb.jpg" alt=""/>' +
+          '<div class="transparent-box">' +
+            '<div class="caption">' +
+              '<p>' + lodges[index].name + '</p>' +
+              '<p class="opacity-low">Vedi le ultime foto!</p>' +
+            '</div>' + 
+          '</div>' + 
+        '</div>' + 
+      '</a>' +
+      '<p class="nome-rifugio">' + lodges[index].name + '</p>' +
+    '</div>';
+  }
+</script>
+</html>

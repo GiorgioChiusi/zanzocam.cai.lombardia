@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="galleries-style.css" rel="stylesheet">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title id="title"></title>
+  </head>
+
+<body style="background-color: #202125;">
+  <div class="container">
+    <div id="images"></div> <!-- Images container (slide show) -->
+
+    <!-- arrows to browse through the slides -->
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+    
+    <div id="thumbnails" class="row"></div> <!-- Thumbnails container -->
+  </div>
+</body>
+
+<script>
+// Get the parameters sent by index via URL
+var para = new URLSearchParams(window.location.search);
+var name = para.get('name'); // Page title
+var ID = para.get('ID'); // ID associated to the lodge by https://www.rifugi.lombardia.it/
+const quantity = 25; // Total pictures to display in the gallery
+
+document.getElementById('title').innerHTML = name; // Change page title
+
+// Create all pictures and thumbnails
+const Images = document.getElementById('images');
+const Thumbnails = document.getElementById('thumbnails');
+for (let index = 0; index < quantity; index++) {
+  Images.innerHTML += 
+  '<div class="mySlides">' +
+    '<div class="numbertext">' + (index+1) + ' / ' + quantity + '</div>' +
+    '<img src="https://webcam.rifugi.lombardia.it/rifugio/' + ID + '/pictures/image__' + index + '.jpg";>' +
+  '</div>';
+
+  Thumbnails.innerHTML +=
+  '<div class="column">' +
+    '<img class="demo cursor" src="https://webcam.rifugi.lombardia.it/rifugio/' + ID + 
+    '/pictures/image__' + index + '.thumb.jpg"' + ' style="width:100%" onclick="currentSlide('+ (index+1) + ')">' +
+  '</div>';
+}
+
+// Slides controllers
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("demo");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+// Alternative for changing the current slide
+document.onkeydown = checkKey;
+function checkKey(e) {
+    e = e || window.event;
+    // Arrow left
+    if (e.keyCode == '37') {
+        plusSlides(-1)
+    }
+    // Arrow right
+    else if (e.keyCode == '39') {
+        plusSlides(1)
+    }
+}
+</script>
+</html>
